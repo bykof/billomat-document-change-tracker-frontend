@@ -1,5 +1,8 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+
+.pull-button {
+    margin-top: 2.6em;
+}
+
+.centered {
+    text-align: center;
 }
