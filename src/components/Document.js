@@ -4,7 +4,7 @@ import './Document.css';
 import moment from "moment";
 
 export default class Document extends Component {
-  
+
   renderDiffTable(change) {
     if (Object.keys(change.diff).length > 0) {
       return (
@@ -22,7 +22,7 @@ export default class Document extends Component {
                 Object.keys(change.diff).map(
                   (key) => {
                     return (
-                      <tr>
+                      <tr key={document._id + '.' + change.date + '.' + key}>
                         <td>
                           {key}
                         </td>
@@ -43,14 +43,14 @@ export default class Document extends Component {
       return <div/>;
     }
   }
-  
+
   render() {
     const document = this.props.document;
-    
-    const renderedChanges = document.changes.map(
+
+    const renderedChanges = document.changes.reverse().map(
       (change) => {
         return (
-          <div>
+          <div key={document._id + '.' + change.date}>
             <div className="row">
               <div className="twelve columns ray-container">
                 <div className="ray"/>
@@ -58,7 +58,7 @@ export default class Document extends Component {
             </div>
             <div className="row">
               <div className="twelve columns centered">
-                <h5>{change.eventType} at {moment(change.date).format('DD.MM.YYYY HH:mm')}</h5>
+                <h5>{change.eventType} at {moment.unix(change.date).format('DD.MM.YYYY HH:mm')}</h5>
               </div>
             </div>
             {this.renderDiffTable(change)}
@@ -66,7 +66,7 @@ export default class Document extends Component {
         );
       }
     );
-    
+
     return (
       <div className="row document-container">
         <div className="twelve columns">
@@ -88,7 +88,7 @@ export default class Document extends Component {
                 {Object.keys(document.document).map(
                   (key) => {
                     return (
-                      <tr>
+                      <tr key={document._id + '.' + key}>
                         <td>{key}</td>
                         <td>{document.document[key]}</td>
                       </tr>

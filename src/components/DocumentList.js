@@ -7,14 +7,14 @@ import {API_URL} from "../config";
 
 
 export default class DocumentList extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
       documents: []
     };
   }
-  
+
   componentWillReceiveProps(newProps) {
     axios.get(
       API_URL + '/documents/search',
@@ -35,13 +35,12 @@ export default class DocumentList extends Component {
       }
     )
   }
-  
+
   render() {
-    
     const renderedDocuments = this.state.documents.map(
       (document) => {
         return (
-          <div key={document.document.id}>
+          <div key={document._id}>
             <Document document={document}/>
             {
               this.state.documents.indexOf(document) === this.state.documents.length - 1 ?
@@ -52,7 +51,7 @@ export default class DocumentList extends Component {
         );
       }
     );
-    
+
     return (
       <div className="row">
         {renderedDocuments}

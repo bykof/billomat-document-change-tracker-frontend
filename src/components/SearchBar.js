@@ -5,10 +5,10 @@ import '../App.css';
 import {API_URL} from "../config";
 
 export default class SearchBar extends Component {
-  
+
   constructor(props) {
     super(props);
-    
+
     this.state = {
       documentTypes: [],
       attributes: [],
@@ -16,26 +16,27 @@ export default class SearchBar extends Component {
       selectedAttribute: '',
       selectedValue: '',
     };
-    
+
     this.onChange = this.onChange.bind(this);
     this.onChanged = this.onChanged.bind(this);
   }
-  
+
   componentWillMount() {
     this.retrieveDocTypes();
   }
-  
+
   onChange(event) {
+    const name = event.target.name;
     this.setState(
-      {[event.target.name]: event.target.value},
+      {[name]: event.target.value},
       () => {
-        if (event.target.name === 'selectedDocumentType') {
+        if (name === 'selectedDocumentType') {
           this.retrieveDocTypeAttributes();
         }
       }
     );
   }
-  
+
   onChanged(event) {
     event.preventDefault();
     if ('onChanged' in this.props) {
@@ -46,7 +47,7 @@ export default class SearchBar extends Component {
       );
     }
   }
-  
+
   retrieveDocTypes() {
     axios.get(API_URL + '/documents/types').then(
       (response) => {
@@ -58,7 +59,7 @@ export default class SearchBar extends Component {
       }
     );
   }
-  
+
   retrieveDocTypeAttributes() {
     axios.get(
       API_URL + '/documents/types/' + this.state.selectedDocumentType + '/attributes'
@@ -72,9 +73,9 @@ export default class SearchBar extends Component {
       }
     )
   }
-  
+
   render() {
-    
+
     const renderedSelectedDocumentType = (
       <div className="six columns">
         <label htmlFor="document_type">Document type</label>
@@ -99,7 +100,7 @@ export default class SearchBar extends Component {
         </select>
       </div>
     );
-    
+
     const renderedSelectedAttribute = (
       <div className="six columns">
         <label htmlFor="attribute">
@@ -126,7 +127,7 @@ export default class SearchBar extends Component {
         </select>
       </div>
     );
-    
+
     const renderedSelectedValue = (
       <div className="six columns">
         <label htmlFor="value">
@@ -142,7 +143,7 @@ export default class SearchBar extends Component {
         />
       </div>
     );
-    
+
     const renderedSearchButton = (
       <div className="six columns">
         <button
@@ -154,7 +155,7 @@ export default class SearchBar extends Component {
         </button>
       </div>
     );
-    
+
     return (
       <div className="row">
         <div className="twelve columns">
