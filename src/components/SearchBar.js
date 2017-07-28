@@ -23,11 +23,17 @@ export default class SearchBar extends Component {
   
   componentWillMount() {
     this.retrieveDocTypes();
-    this.retrieveDocTypeAttributes();
   }
   
   onChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState(
+      {[event.target.name]: event.target.value},
+      () => {
+        if (event.target.name === 'selectedDocumentType') {
+          this.retrieveDocTypeAttributes();
+        }
+      }
+    );
   }
   
   onChanged(event) {
