@@ -100,6 +100,30 @@ export default class Document extends Component {
             </div>
           </div>
           {renderedChanges}
+          <div className="row">
+            <div className="twelve columns document-table">
+              <table className="u-full-width">
+                <thead>
+                <tr>
+                  <th>Attribut</th>
+                  <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                {Object.keys(document.originalDocument).map(
+                  (key) => {
+                    return (
+                      <tr key={document._id + '.original.' + key}>
+                        <td>{key}</td>
+                        <td>{document.originalDocument[key]}</td>
+                      </tr>
+                    );
+                  }
+                )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     );
