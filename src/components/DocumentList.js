@@ -11,38 +11,7 @@ export default class DocumentList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      documents: [
-        {
-          document: {id: 'sexy', invoice_number: 'RE-434543'},
-          changes: [
-            {
-              date: new Date(),
-              eventType: 'updated',
-              diff: {
-                invoice_number: "nub"
-              }
-            }
-          ]
-        },
-        {
-          document: {id: 'hello', invoice_number: 'RE-1234'},
-          changes: [
-            {
-              date: new Date(),
-              eventType: 'updated',
-              diff: {
-                invoice_number: "be"
-              }
-            },
-            {
-              date: new Date(),
-              eventType: 'created',
-              diff: {
-              }
-            }
-          ]
-        }
-      ]
+      documents: []
     };
   }
   

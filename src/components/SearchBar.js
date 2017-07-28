@@ -10,14 +10,8 @@ export default class SearchBar extends Component {
     super(props);
     
     this.state = {
-      documentTypes: [
-        'invoice',
-        'delivery-note'
-      ],
-      attributes: [
-        'invoice_number',
-        'id',
-      ],
+      documentTypes: [],
+      attributes: [],
       selectedDocumentType: '',
       selectedAttribute: '',
       selectedValue: '',
@@ -28,8 +22,8 @@ export default class SearchBar extends Component {
   }
   
   componentWillMount() {
-    //this.retrieveDocTypes();
-    //this.retrieveDocTypeAttributes();
+    this.retrieveDocTypes();
+    this.retrieveDocTypeAttributes();
   }
   
   onChange(event) {
