@@ -66,6 +66,29 @@ export default class Document extends Component {
         );
       }
     );
+    
+    
+    let renderedOriginalDocument = (
+      <tr>
+        <td>
+          No original document found...
+        </td>
+        <td />
+      </tr>
+    );
+  
+    if (document.originalDocument) {
+      renderedOriginalDocument = Object.keys(document.originalDocument).map(
+        (key) => {
+          return (
+            <tr key={document._id + '.original.' + key}>
+              <td>{key}</td>
+              <td>{document.originalDocument[key]}</td>
+            </tr>
+          );
+        }
+      );
+    }
 
     return (
       <div className="row document-container">
@@ -110,16 +133,7 @@ export default class Document extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {Object.keys(document.originalDocument).map(
-                  (key) => {
-                    return (
-                      <tr key={document._id + '.original.' + key}>
-                        <td>{key}</td>
-                        <td>{document.originalDocument[key]}</td>
-                      </tr>
-                    );
-                  }
-                )}
+                {renderedOriginalDocument}
                 </tbody>
               </table>
             </div>
